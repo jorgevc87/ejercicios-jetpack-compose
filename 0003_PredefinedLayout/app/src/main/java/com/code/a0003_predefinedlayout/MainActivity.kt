@@ -12,12 +12,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.code.a0003_predefinedlayout.ui.theme._0003_PredefinedLayoutTheme
 
 /*
-
 Main axes:
 - Horizontal
 - Vertical
 - stacked
-
 */
 
 class MainActivity : ComponentActivity() {
