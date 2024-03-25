@@ -1,4 +1,5 @@
-package com.code.a0003_predefinedlayout
+package com.code.a0004_predefinedlayoutconstraints
+
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -23,7 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.code.a0003_predefinedlayout.ui.theme._0003_PredefinedLayoutTheme
+import androidx.constraintlayout.compose.ConstraintLayout
+import com.code.a0004_predefinedlayoutconstraints.ui.theme._0004_PredefinedLayoutConstraintsTheme
 
 /*
 Main axes:
@@ -36,7 +38,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            _0003_PredefinedLayoutTheme {
+            _0004_PredefinedLayoutConstraintsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -88,23 +90,29 @@ fun PredefinedLayout() {
                 .padding(top = 16.dp)
         ) {
             if (red.value) {
-                Box(modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Red))
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color.Red)
+                )
             }
 
             if (green.value) {
-                Box(modifier = Modifier
-                    .fillMaxSize()
-                    .padding(32.dp)
-                    .background(Color.Green))
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(32.dp)
+                        .background(Color.Green)
+                )
             }
 
-            if(blue.value){
-                Box(modifier = Modifier
-                    .fillMaxSize()
-                    .padding(64.dp)
-                    .background(Color.Blue))
+            if (blue.value) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(64.dp)
+                        .background(Color.Blue)
+                )
             }
         }
     }
@@ -112,21 +120,33 @@ fun PredefinedLayout() {
 
 //Creating el checkbox
 @Composable
-fun CheckWithLabel(label: String, state: MutableState<Boolean>) {
-    Row(
-        modifier = Modifier.clickable { state.value = !state.value },
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Checkbox(checked = state.value, onCheckedChange = {
-            state.value = it
-        })
+fun CheckWithLabel(label: String, state: MutableState<Boolean>, modifier: Modifier = Modifier) {
 
-        Text(text = label, modifier = Modifier.padding(start = 8.dp))
+    ConstraintLayout(modifier = modifier.clickable {
+        state.value = !state.value //setting the value
+    }) {
+
+        //Creating references to manage components
+        val (checkBox, text) = createRefs()
+
+        Checkbox(
+            checked = state.value, //setting checked state
+            onCheckedChange = {//Action for click action
+                state.value = it
+            },
+            modifier = Modifier.constrainAs(checkBox) {//setting the identifier
+
+            }
+        )
+
+        Text(
+            text = label,
+            modifier = Modifier.constrainAs(text) {
+                //Setting constraintlayout constraints
+                start.linkTo(checkBox.end, margin = 8.dp)
+                top.linkTo(checkBox.top)
+                bottom.linkTo(checkBox.bottom)
+            }
+        )
     }
 }
-
-
-
-
-
-
