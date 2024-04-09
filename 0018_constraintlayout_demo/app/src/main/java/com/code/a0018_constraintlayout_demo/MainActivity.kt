@@ -1,6 +1,7 @@
 package com.code.a0018_constraintlayout_demo
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -48,6 +49,10 @@ fun ConstraintLayoutDemo() {
     val red = remember { mutableStateOf(true) }
     val blue = remember { mutableStateOf(true) }
     val green = remember { mutableStateOf(true) }
+
+    val visibleBoxRed = remember { mutableStateOf(true) }
+    val visibleBoxBlue = remember { mutableStateOf(true) }
+    val visibleBoxGreen = remember { mutableStateOf(true) }
 
     ConstraintLayout(
         modifier = Modifier
@@ -113,6 +118,20 @@ fun ConstraintLayoutDemo() {
             .background(Color.Blue)
             .clickable {
 
+            })
+
+        Box(modifier = Modifier
+            .constrainAs(boxGreen) {
+                start.linkTo(parent.start, margin = (16 + 32).dp)
+                end.linkTo(parent.end, margin = (32 + 16).dp)
+                top.linkTo(cbBlue.top, margin = (32 + 32 + 16).dp)
+                bottom.linkTo(parent.bottom, margin = (32 + 16).dp)
+                width = Dimension.fillToConstraints
+                height = Dimension.fillToConstraints
+            }
+            .background(Color.Green)
+            .clickable {
+                //Handle click
             })
     }
 }
