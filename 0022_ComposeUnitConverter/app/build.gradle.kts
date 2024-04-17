@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.code.a0021_viewmodel_demo01"
+    namespace = "com.code.a0022_composeunitconverter"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.code.a0021_viewmodel_demo01"
+        applicationId = "com.code.a0022_composeunitconverter"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -59,12 +59,6 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-
-    implementation(libs.androidx.livedata)
-    implementation(libs.androidx.lifecycle)
-    implementation(libs.androidx.viewmodel)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
